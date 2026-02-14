@@ -375,7 +375,7 @@ Got an idea? We'd love to hear it! Drop us a line in the Support section above.
 Wanna chat? Have a question? Found a bug?
 
 - **📫 Email** - souvikwork199@gmail.com
-- **💬 Got a Problem?** - Send me a mail with the bug and issues.
+- **💬 Got a Problem?** - Send me a mail with the bug and issues you found.
 - **💡 Got an Idea?** - We'd love to hear your feedback and suggestions!
 
 We're here to help and love hearing from players and developers like you!
