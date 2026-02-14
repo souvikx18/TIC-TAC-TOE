@@ -1,0 +1,126 @@
+@import 'notifications.css';
+
+:root {
+    /* Light Theme */
+    --bg-color: #f0f4f8;
+    --text-color: #333;
+    --primary-color: #7FC6A4;
+    --secondary-color: #422acc;
+    --accent-color: #ff6b6b;
+    --card-bg: #fff;
+    --nav-bg: rgba(255, 255, 255, 0.75);
+    /* More translucent for better blur */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* Typography */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme - Enhanced */
+    --bg-color: #1a1a2e;
+    --bg-gradient: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+    --text-color: #f0f4f8;
+    --primary-color: #5aa886;
+    --secondary-color: #6c5ce7;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --nav-bg: rgba(15, 15, 20, 0.8);
+    /* Deeper, more atmospheric dark as seen in image */
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Buttons (Moved from main.css for global access) */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #5b42f3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(66, 42, 204, 0.4);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    margin-left: 1rem;
+}
+
+.btn-outline:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}

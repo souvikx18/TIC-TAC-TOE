@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tic-Tac-Toe Pro</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Play</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="about-hero">
+        <div class="about-hero-content reveal">
+            <h1>We Are Reimagining <br>Classic Gaming</h1>
+            <p>Blending nostalgia with modern design to create unforgettable digital experiences. Welcome to the future
+                of Tic-Tac-Toe.</p>
+        </div>
+    </header>
+
+    <!-- Mission & Values -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 class="section-title reveal">Our Mission</h2>
+            <div class="mission-grid">
+                <div class="mission-card reveal">
+                    <div class="mission-icon">✨</div>
+                    <h3>Modern Aesthetics</h3>
+                    <p>We believe that simple games shouldn't look boring. We push the boundaries of web design to
+                        create visually stunning interfaces.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <div class="mission-icon">🚀</div>
+                    <h3>Smooth Performance</h3>
+                    <p>Optimized for every device, our games run at 60fps with fluid animations and instant
+                        responsiveness.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <div class="mission-icon">🤝</div>
+                    <h3>Community First</h3>
+                    <p>Built for players, by players. We listen to feedback and constantly improve the experience based
+                        on what you want.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title reveal">Meet The Team</h2>
+            <div class="team-grid">
+                <!-- Lead Developer -->
+                <div class="team-card reveal">
+                    <div class="member-img">
+                        <img src="assets/souvik-peaky.png" alt="Souvik">
+                    </div>
+                    <h3>Souvik</h3>
+                    <div class="team-role">Lead Developer & Architect</div>
+                    <p class="team-bio">The mastermind behind the code. Passionate about clean architecture, scalable
+                        systems, and pixel-perfect UIs.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">💻</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+
+                <!-- Creative Director (Placeholder) -->
+                <div class="team-card reveal" style="transition-delay: 0.2s;">
+                    <div class="member-img">
+                        <img src="https://i.pravatar.cc/300?u=alex" alt="Alex">
+                    </div>
+                    <h3>Alex</h3>
+                    <div class="team-role">Creative Director</div>
+                    <p class="team-bio">Ensuring every pixel is in its right place. An expert in UX/UI design with a
+                        love for neon aesthetics.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">🎨</a>
+                        <a href="#" class="social-icon">📷</a>
+                    </div>
+                </div>
+
+                <!-- Game Designer (Placeholder) -->
+                <div class="team-card reveal" style="transition-delay: 0.4s;">
+                    <div class="member-img">
+                        <img src="https://i.pravatar.cc/300?u=sarah" alt="Sarah">
+                    </div>
+                    <h3>Sarah</h3>
+                    <div class="team-role">Gameplay Engineer</div>
+                    <p class="team-bio">Crafting the logic that makes the game challenging and fun. AI enthusiast and
+                        puzzle solver.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">🎮</a>
+                        <a href="#" class="social-icon">⏯️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content reveal">
+            <h2>Ready to experience the game?</h2>
+            <p>Join thousands of players and test your skills now.</p>
+            <a href="game.html" class="btn btn-primary btn-lg">Play Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">USING OUR WEBSITE AND PLAY GAMES</p>
+        </div>
+    </footer>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+
+</html>

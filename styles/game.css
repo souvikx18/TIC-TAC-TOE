@@ -1,0 +1,353 @@
+.game-container {
+    padding-top: 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Deep Rich Gradient Background */
+    background: radial-gradient(circle at top right, #1a1a2e, #16213e, #0f3460);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Abstract Background Shapes */
+.game-container::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(127, 198, 164, 0.15) 0%, transparent 70%);
+    top: -200px;
+    right: -200px;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.game-container::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(66, 42, 204, 0.15) 0%, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.game-header {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.game-header h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #a5a5a5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    letter-spacing: -1px;
+}
+
+#status {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    /* Glassmorphism Board */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 0.5s ease;
+}
+
+.game:hover {
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.box {
+    height: 110px;
+    width: 110px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+.box:hover:not(:disabled) {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.box:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+/* Neon X and O */
+.box.x {
+    color: #00f2ff;
+    /* Cyan Neon */
+    text-shadow:
+        0 0 10px rgba(0, 242, 255, 0.8),
+        0 0 20px rgba(0, 242, 255, 0.5);
+}
+
+.box.o {
+    color: #ff0055;
+    /* Arcade Pink Neon */
+    text-shadow:
+        0 0 10px rgba(255, 0, 85, 0.8),
+        0 0 20px rgba(255, 0, 85, 0.5);
+}
+
+.reset {
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.reset:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px) scale(1.05) rotate(2deg);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(66, 42, 204, 0.6);
+    cursor: pointer;
+}
+
+.reset:active {
+    transform: scale(0.95) rotate(-2deg);
+}
+
+/* Win Animation */
+.box.win {
+    background: rgba(255, 255, 255, 0.2) !important;
+    animation: pulse-glow 1.5s infinite;
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        height: 90px;
+        width: 90px;
+        font-size: 3rem;
+    }
+
+    .game {
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Overlays */
+/* Overlays */
+/* Arcade Style Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dynamic Dark Blue/Purple Background with Speed Lines */
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 2px,
+            transparent 2px,
+            transparent 10px),
+        radial-gradient(circle at center, #2b1055 0%, #15002d 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    background: transparent;
+    /* No card background, just text */
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+
+    /* Animation: Zoom and Rotate In */
+    transform: scale(0) rotate(-15deg);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s ease;
+}
+
+.overlay.active .overlay-content {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+/* "TIME TO PLAY!" Style Typography */
+.overlay h2 {
+    font-family: 'Arial Black', sans-serif;
+    /* Thickest font available by default */
+    font-size: 5rem;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+    transform: skew(-10deg);
+    margin-bottom: 3rem;
+
+    /* 3D Pop Effect */
+    text-shadow:
+        1px 1px 0px #eb452b,
+        2px 2px 0px #eb452b,
+        3px 3px 0px #eb452b,
+        4px 4px 0px #eb452b,
+        5px 5px 0px #302b63,
+        /* Deep shadow start */
+        6px 6px 0px #302b63,
+        7px 7px 0px #302b63,
+        8px 8px 0px #302b63;
+
+    -webkit-text-stroke: 2px #302b63;
+}
+
+.overlay-btns {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    transform: skew(-10deg);
+    /* Match text skew */
+}
+
+.overlay-btns .btn {
+    min-width: 160px;
+    font-size: 1.8rem;
+    padding: 1rem 3rem;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+#btn-yes {
+    background: #9900ff;
+    /* Arcade Red/Pink */
+    color: white;
+    text-shadow: 2px 2px 0px #900;
+    box-shadow: 5px 5px 0px rgb(10, 10, 10);
+    border-color: #fff;
+}
+
+#btn-yes:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px rgb(10, 10, 10);
+    background: #ff1f6d;
+}
+
+#btn-yes:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px rgb(10, 10, 10);
+}
+
+#btn-no {
+    background: #2b1055;
+    color: white;
+    box-shadow: 5px 5px 0px #000;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+#btn-no:hover {
+    background: #3b1570;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px rgb(10, 10, 10);
+}
+
+/* Blur Effect for Game Background */
+.blur-target {
+    transition: filter 0.3s ease;
+}
+
+body.overlay-active .blur-target {
+    filter: blur(8px) brightness(0.7);
+    pointer-events: none;
+}
+
+/* Confetti Particles */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    top: -10px;
+    z-index: 9999;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}

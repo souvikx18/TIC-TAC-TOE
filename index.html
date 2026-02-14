@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - Master the Game</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="game.html">Play</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Master the Classic Game of <span class="highlight">Tic-Tac-Toe</span></h1>
+            <p>Experience the timeless strategy game with a modern twist. Play against friends or challenge our AI.
+                Clean design, smooth animations, and endless fun.</p>
+            <div class="hero-btns">
+                <a href="game.html" class="btn btn-primary btn-lg">Play Now</a>
+                <a href="#features" class="btn btn-outline btn-lg">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <!-- decorative elements can go here -->
+            <div class="floating-x">X</div>
+            <div class="floating-o">O</div>
+        </div>
+    </header>
+
+    <section id="features" class="features reveal">
+        <div class="container">
+            <h2>Why Play Here?</h2>
+            <div class="feature-grid">
+                <div class="feature-card reveal">
+                    <div class="icon">🎮</div>
+                    <h3>Instant Play</h3>
+                    <p>No waiting, no ads. Jump straight into the action with a single click.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="icon">🎨</div>
+                    <h3>Modern Design</h3>
+                    <p>A beautiful, responsive interface that looks great on any device.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="icon">🌗</div>
+                    <h3>Dark Mode</h3>
+                    <p>Play comfortably at any time with our built-in dark mode support.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="icon">🔒</div>
+                    <h3>Secure Login</h3>
+                    <p>Your data is safe with us. Create an account to track your progress.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="icon">🏆</div>
+                    <h3>Leaderboards</h3>
+                    <p>Compete with friends and climb the global rankings (Coming Soon).</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="icon">📱</div>
+                    <h3>Fully Responsive</h3>
+                    <p>Experience seamless gameplay on Mobile, Tablet, and Desktop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials reveal">
+        <div class="container">
+            <h2>What Players Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=a" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"The best Tic-Tac-Toe experience I've had on the web. Love the modern design!"</p>
+                    <h4>- Alex Johnson</h4>
+                    <span class="role">Pro Player</span>
+                </div>
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=b" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Simple, fast, and elegant. Exactly what I was looking for to kill some time."</p>
+                    <h4>- Sarah Miller</h4>
+                    <span class="role">Casual Gamer</span>
+                </div>
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=c" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Dark mode is a game changer. My eyes thank you for this feature!"</p>
+                    <h4>- David Kim</h4>
+                    <span class="role">Developer</span>
+                </div>
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=d" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐</div>
+                    <p>"I love playing this with my friends. The UI is super smooth."</p>
+                    <h4>- Emily Chen</h4>
+                    <span class="role">Student</span>
+                </div>
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=e" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Finally a Tic-Tac-Toe game that doesn't look like it was made in 1990."</p>
+                    <h4>- Michael Brown</h4>
+                    <span class="role">Designer</span>
+                </div>
+                <div class="testimonial-card reveal">
+                    <img src="https://i.pravatar.cc/150?u=f" alt="User Avatar" class="avatar">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Great responsive design. Works perfectly on my phone."</p>
+                    <h4>- Jessica Lee</h4>
+                    <span class="role">Mobile User</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <!-- Social links removed as per user request -->
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">THIS WEBSITE IS DEVELOPED BY SOUVIK</p>
+        </div>
+    </footer>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+
+</html>

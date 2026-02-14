@@ -1,0 +1,292 @@
+/* About Page Specific Styles */
+
+/* Hero Section */
+.about-hero {
+    min-height: 100vh;
+    /* Full screen as requested */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    /* Theme-aware background */
+    background: var(--bg-color);
+    overflow: hidden;
+    padding-top: 80px;
+    transition: background 0.3s ease;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: repeating-linear-gradient(transparent 0px, transparent 2px, rgba(127, 198, 164, 0.05) 2px, rgba(127, 198, 164, 0.05) 4px);
+    animation: rotateBackground 60s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotateBackground {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.about-hero h1 {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, var(--text-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.about-hero p {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Section Styling */
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0 auto 3rem auto;
+    position: relative;
+    display: block;
+    width: fit-content;
+}
+
+/* Mission & Story */
+/* Mission & Story */
+.mission-section {
+    padding: 8rem 0;
+    /* Theme-aware background */
+    background: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+.mission-section .section-title {
+    color: var(--text-color);
+}
+
+/* Background Elements for Mission */
+.mission-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(127, 198, 164, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(66, 42, 204, 0.05) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.mission-card {
+    /* Glassmorphism that adapts */
+    background: var(--card-bg);
+    opacity: 0.9;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(127, 198, 164, 0.1);
+    text-align: center;
+}
+
+.mission-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.mission-card h3 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.mission-card p {
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.mission-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(127, 198, 164, 0.1), rgba(66, 42, 204, 0.1));
+    color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.mission-card:hover .mission-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Team Section */
+.team-section {
+    padding: 6rem 0;
+    /* Theme-aware gradient */
+    background: linear-gradient(to bottom, var(--bg-color), var(--card-bg));
+    position: relative;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(127, 198, 164, 0.2);
+}
+
+.member-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    padding: 5px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
+.member-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--card-bg);
+}
+
+.team-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.team-role {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.team-bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.social-icons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.social-icon:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+
+/* CTA Section */
+.cta-section {
+    padding: 6rem 0;
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.cta-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 3rem;
+    }
+
+    .team-grid {
+        gap: 2rem;
+    }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/game.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html" class="active">Play</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+    <main class="game-container">
+        <!-- Game Start Overlay -->
+        <div id="start-overlay" class="overlay active">
+            <div class="overlay-content">
+                <h2>Ready to Play?</h2>
+                <div class="overlay-btns">
+                    <button id="btn-yes" class="btn btn-primary">Yes</button>
+                    <button id="btn-no" class="btn btn-secondary">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Overlay -->
+        <div id="notification-overlay" class="overlay">
+            <div class="overlay-content">
+                <h2>Enjoy your Game! 🎮</h2>
+            </div>
+        </div>
+
+        <div class="game-header blur-target">
+            <h1>Tic Tac Toe</h1>
+            <p id="status">Player X's Turn</p>
+        </div>
+
+        <div class="container blur-target">
+            <div class="game">
+                <button class="box" data-index="0"></button>
+                <button class="box" data-index="1"></button>
+                <button class="box" data-index="2"></button>
+                <button class="box" data-index="3"></button>
+                <button class="box" data-index="4"></button>
+                <button class="box" data-index="5"></button>
+                <button class="box" data-index="6"></button>
+                <button class="box" data-index="7"></button>
+                <button class="box" data-index="8"></button>
+            </div>
+        </div>
+        <button class="reset btn btn-primary blur-target">Reset Game</button>
+    </main>
+    <footer>
+        <div class="container">
+            <!-- Social links removed as per user request -->
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">THIS GAME IS DEVELOPED BY SOUVIK</p>
+        </div>
+    </footer>
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+
+</html>

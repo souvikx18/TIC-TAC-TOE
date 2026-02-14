@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Tic-Tac-Toe Master</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+    <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe MASTER</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Play Game</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+            <div class="auth-buttons" id="auth-nav">
+                <!-- Will be updated by updateAuthUI -->
+            </div>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-bg-glow"></div>
+        <div class="profile-bg-glow-2"></div>
+
+        <div class="profile-card reveal active">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <div class="profile-avatar" id="avatar-initials">U</div>
+                    <label for="profile-upload" class="edit-photo-btn">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="profile-upload" accept="image/*" style="display: none;">
+                </div>
+                <div class="profile-info">
+                    <h1 id="display-username">Username</h1>
+                    <p id="display-email">user@example.com</p>
+                </div>
+            </div>
+
+            <form class="profile-form" id="profile-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Change username" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" disabled>
+                </div>
+
+                <div class="social-connections">
+                    <h3>Social Connections</h3>
+                    <div class="social-grid">
+                        <div class="social-item instagram">
+                            <i class="fab fa-instagram social-icon"></i>
+                            <span>Instagram</span>
+                            <input type="text" id="instagramUrl" placeholder="@username or link">
+                        </div>
+                        <div class="social-item facebook">
+                            <i class="fab fa-facebook social-icon"></i>
+                            <span>Facebook</span>
+                            <input type="text" id="facebookUrl" placeholder="Profile link">
+                        </div>
+                        <div class="social-item snapchat">
+                            <i class="fab fa-snapchat social-icon"></i>
+                            <span>Snapchat</span>
+                            <input type="text" id="snapchatUrl" placeholder="Snapchat handle">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-save-profile">
+                    Save Profile Changes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if user is logged in
+            const isAuthenticated = await TokenManager.isAuthenticated();
+            if (!isAuthenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Sync nav UI
+            updateAuthUI();
+
+            // Load profile data
+            try {
+                const response = await API.auth.getProfile();
+                if (response.success) {
+                    const user = response.user;
+                    document.getElementById('display-username').textContent = user.username;
+                    document.getElementById('display-email').textContent = user.email;
+
+                    const avatarInitials = document.getElementById('avatar-initials');
+                    if (user.profilePicture) {
+                        avatarInitials.textContent = '';
+                        avatarInitials.style.backgroundImage = `url(${user.profilePicture})`;
+                        avatarInitials.style.backgroundSize = 'cover';
+                        avatarInitials.style.backgroundPosition = 'center';
+                    } else {
+                        avatarInitials.textContent = user.username.charAt(0).toUpperCase();
+                        avatarInitials.style.backgroundImage = 'none';
+                    }
+
+                    document.getElementById('username').value = user.username;
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('instagramUrl').value = user.instagramUrl || '';
+                    document.getElementById('facebookUrl').value = user.facebookUrl || '';
+                    document.getElementById('snapchatUrl').value = user.snapchatUrl || '';
+                } else {
+                    NotificationSystem.toast('Could not load profile', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                NotificationSystem.toast('An error occurred', 'error');
+            }
+
+            // Handle Photo Upload
+            document.getElementById('profile-upload').addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Validate file size (2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    NotificationSystem.toast('Image size must be less than 2MB', 'error');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('profilePicture', file);
+
+                try {
+                    const response = await API.auth.uploadProfilePicture(formData);
+                    if (response.success) {
+                        NotificationSystem.toast('Profile picture updated!', 'success');
+
+                        // Update UI
+                        const avatarInitials = document.getElementById('avatar-initials');
+                        avatarInitials.textContent = '';
+                        avatarInitials.style.backgroundImage = `url(${response.profilePicture})`;
+                        avatarInitials.style.backgroundSize = 'cover';
+                        avatarInitials.style.backgroundPosition = 'center';
+
+                        // Update local storage if needed
+                        const userModel = UserManager.get();
+                        if (userModel) {
+                            userModel.profilePicture = response.profilePicture;
+                            UserManager.set(userModel);
+                        }
+                    } else {
+                        NotificationSystem.toast(response.message || 'Upload failed', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error uploading photo:', error);
+                    NotificationSystem.toast(error.message || 'Error uploading photo', 'error');
+                }
+            });
+
+            // Handle form submission
+            document.getElementById('profile-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const profileData = {
+                    username: document.getElementById('username').value,
+                    instagramUrl: document.getElementById('instagramUrl').value,
+                    facebookUrl: document.getElementById('facebookUrl').value,
+                    snapchatUrl: document.getElementById('snapchatUrl').value
+                };
+
+                try {
+                    const response = await API.auth.updateProfile(profileData);
+                    if (response.success) {
+                        NotificationSystem.toast('Profile updated successfully!', 'success');
+
+                        // Update UI display
+                        document.getElementById('display-username').textContent = response.user.username;
+                        document.getElementById('avatar-initials').textContent = response.user.username.charAt(0).toUpperCase();
+
+                        // Update stored username in localStorage
+                        const userModel = UserManager.get();
+                        if (userModel) {
+                            userModel.username = response.user.username;
+                            UserManager.set(userModel);
+                        }
+
+                        // Update nav
+                        updateAuthUI();
+                    } else {
+                        NotificationSystem.toast(response.message || 'Update failed', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    NotificationSystem.toast('An error occurred', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

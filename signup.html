@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Play</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Create Account</h2>
+            <p>Start your winning streak today</p>
+            <form id="signupForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Username</label>
+                    <input type="text" id="name" required placeholder="Enter username">
+                    <span class="error-message">Username is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
+                    <span class="error-message">Please enter a valid email</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                    <span class="error-message">Password must be at least 6 characters</span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            <div class="form-footer">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">THIS WEBSITE IS DEVELOPED BY SOUVIK</p>
+        </div>
+    </footer>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+    <script>
+        const form = document.getElementById('signupForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Clear previous errors
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+
+            // Basic validation
+            let valid = true;
+
+            if (!username || username.length < 3) {
+                document.getElementById('name').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!email || !email.includes('@')) {
+                document.getElementById('email').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!password || password.length < 6) {
+                document.getElementById('password').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Account...';
+
+            try {
+                const response = await API.auth.signup(username, email, password);
+
+                // Store user data (token is now in secure HTTP-only cookie)
+                UserManager.set(response.user);
+
+                NotificationSystem.welcome(response.user.username, () => {
+                    window.location.href = 'index.html';
+                });
+            } catch (error) {
+                NotificationSystem.toast(error.message || 'Failed to create account. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Sign Up';
+            }
+        });
+    </script>
+</body>
+
+</html>

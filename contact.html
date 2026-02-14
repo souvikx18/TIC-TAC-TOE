@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Play</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <!-- Background Decorative Elements -->
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+
+        <div class="auth-box reveal">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you!</p>
+            <form id="contactForm" novalidate>
+                <div class="form-group">
+                    <input type="text" id="name" required placeholder=" ">
+                    <label for="name">Name</label>
+                    <span class="error-message">Name is required</span>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label for="email">Email</label>
+                    <span class="error-message">Please enter a valid email</span>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="4" required placeholder=" "></textarea>
+                    <label for="message">Your Message</label>
+                    <span class="error-message">Message cannot be empty</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">SHARE YOUR EXPERIENCE WITH US</p>
+        </div>
+    </footer>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Clear previous errors
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+
+            // Basic validation
+            let valid = true;
+
+            if (!name || name.length < 2) {
+                document.getElementById('name').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!email || !email.includes('@')) {
+                document.getElementById('email').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!message || message.length < 10) {
+                document.getElementById('message').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const response = await API.contact.send(name, email, message);
+
+                NotificationSystem.toast(response.message || 'Message sent successfully!', 'success');
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            } catch (error) {
+                NotificationSystem.toast(error.message || 'Failed to send message. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
+</body>
+
+</html>

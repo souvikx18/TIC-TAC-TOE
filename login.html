@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Tic-Tac-Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html">Play</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><button id="theme-toggle">🌙</button></li>
+        </ul>
+        <div id="auth-nav" class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Welcome Back</h2>
+            <p>Login to continue playing</p>
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
+                    <span class="error-message">Please enter a valid email</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                    <span class="error-message">Password is required</span>
+                </div>
+                <div style="text-align: right; margin-bottom: 1rem;">
+                    <a href="forgot-password.html"
+                        style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;">Forgot
+                        Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div class="form-footer">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tic-Tac-Toe Platform. All rights reserved.</p>
+            <p class="developer-credit">THIS WEBSITE IS DEVELOPED BY SOUVIK</p>
+        </div>
+    </footer>
+
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+    <script>
+        const form = document.getElementById('loginForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Clear previous errors
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+
+            // Basic validation
+            let valid = true;
+
+            if (!email || !email.includes('@')) {
+                document.getElementById('email').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!password) {
+                document.getElementById('password').parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Logging in...';
+
+            try {
+                const response = await API.auth.login(email, password);
+
+                // Store user data (token is now in secure HTTP-only cookie)
+                UserManager.set(response.user);
+
+                NotificationSystem.welcome(response.user.username, () => {
+                    window.location.href = 'index.html';
+                });
+            } catch (error) {
+                NotificationSystem.toast(error.message || 'Invalid email or password', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login';
+            }
+        });
+    </script>
+</body>
+
+</html>

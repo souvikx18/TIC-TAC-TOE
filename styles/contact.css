@@ -1,0 +1,192 @@
+/* Contact Page Specific Styles */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 20px 40px;
+    /* Reduced further to match ultra-sleek navbar */
+    background: var(--bg-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient Background Elements */
+.bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    /* Increased blur for a softer atmospheric feel */
+    z-index: 0;
+    opacity: 0.35;
+    animation: float 25s infinite alternate;
+}
+
+.orb-1 {
+    width: 600px;
+    height: 600px;
+    background: var(--primary-color);
+    top: -200px;
+    right: -100px;
+}
+
+.orb-2 {
+    width: 450px;
+    height: 450px;
+    background: var(--secondary-color);
+    bottom: -100px;
+    left: -50px;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-color);
+    top: 40%;
+    left: 20%;
+    opacity: 0.2;
+    animation-duration: 30s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(50px, 100px) rotate(30deg);
+    }
+}
+
+.auth-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+    /* Ensure it stays above the haze */
+    transition: transform 0.3s ease;
+}
+
+.auth-box:hover {
+    transform: translateY(-5px);
+}
+
+.auth-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.auth-box p {
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Floating Label Form Groups */
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(127, 198, 164, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-group label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.form-group textarea~label {
+    top: 1.5rem;
+}
+
+/* Label movement on focus/value */
+.form-group input:focus~label,
+.form-group input:not(:placeholder-shown)~label,
+.form-group textarea:focus~label,
+.form-group textarea:not(:placeholder-shown)~label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.85rem;
+    opacity: 1;
+    color: var(--primary-color);
+    background: var(--bg-color);
+    padding: 0 8px;
+    border-radius: 4px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(127, 198, 164, 0.1);
+}
+
+.auth-box .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.auth-box .btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(66, 42, 204, 0.3);
+}
+
+.error-message {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: -18px;
+    left: 10px;
+    display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+    border-color: var(--accent-color);
+}
+
+.form-group.error .error-message {
+    display: block;
+}

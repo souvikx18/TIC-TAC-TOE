@@ -1,0 +1,219 @@
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 60px;
+    /* Navbar height */
+    text-align: center;
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero .highlight {
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+/* Buttons */
+/* Buttons - Moved to distinct global.css */
+/* Auth Buttons in Nav - Specific styling */
+.auth-buttons .btn {
+    padding: 0.5rem 1.2rem;
+    /* Smaller sizing as requested */
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.auth-buttons .btn-primary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(66, 42, 204, 0.5);
+    /* Enhanced hover */
+}
+
+
+/* Auth Buttons in Nav */
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: 2rem;
+}
+
+/* Floating Elements Animation */
+.hero-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-x,
+.floating-o {
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    font-weight: bold;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-x {
+    top: 20%;
+    left: 10%;
+    color: var(--secondary-color);
+}
+
+.floating-o {
+    bottom: 20%;
+    right: 10%;
+    color: var(--primary-color);
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* Features Section */
+.features {
+    padding: 5rem 0;
+    background-color: var(--card-bg);
+}
+
+.features h2,
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: var(--bg-color);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Testimonials */
+.testimonials {
+    padding: 5rem 0;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-card .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary-color);
+    object-fit: cover;
+}
+
+.testimonial-card .stars {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.testimonial-card h4 {
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.testimonial-card .role {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        /* simple mobile hide for now, needs hamburger menu later or simple stack */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content {
+        padding: 0 1rem;
+    }
+}
